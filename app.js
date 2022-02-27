@@ -3,10 +3,13 @@ require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
+// used as a framework for mongodb
 const mongoose = require("mongoose");
 const session = require('express-session');
+// passport js is used for the identification setup
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
+//Google login using Passport.js
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
 
@@ -19,7 +22,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(session({
-  secret: "Our little secret.",
+  secret: "A keeper App to save all your notes.",
   resave: false,
   saveUninitialized: false
 }));
@@ -136,6 +139,7 @@ app.get("/logout", function(req, res){
   req.logout();
   res.redirect("/");
 });
+//Register for the page if he hasnt looged in
 
 app.post("/register", function(req, res){
 
