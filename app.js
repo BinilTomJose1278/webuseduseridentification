@@ -30,7 +30,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/userDB", {useNewUrlParser: true});
+
 mongoose.set("useCreateIndex", true);
 
 const userSchema = new mongoose.Schema ({
@@ -176,11 +176,26 @@ app.post("/login", function(req, res){
 });
 
 
+const DB ='mongodb+srv://keeperapp:keeper123@cluster0.gdhxt.mongodb.net/keeper1?retryWrites=true&w=majority';
+mongoose.connect(DB,{
+useNewUrlParser: true,
+useCreateIndex: true,
+useUnifiedTopology: true,
+SuseFindandModify: false
 
+}).then(() => {
 
-
+  console.log('connection successfull');
+}).catch((err) => console.log(err));
 
 
 app.listen(3000, function() {
   console.log("Server started on port 3000.");
 });
+
+
+
+
+
+
+
